@@ -52,12 +52,12 @@ def kmeans(dataSet, k):
             ptsInCluster = dataSet[nonzero(clusterAssment[:, 0].A == j)[0]]
             centroids[j, :] = mean(ptsInCluster, axis = 0)
 
-    print 'cluster over!'
+    print "cluster over!"
     return centroids, clusterAssment
 
 #show cluster result
 def showCluster(dataSet, k, centroids, clusterAssment):
-    numSamples, dim = dataSet.shap
+    numSamples, dim = dataSet.shape
     if dim != 2:
         print "sorry! dimension is not 2!"
         return 1
@@ -69,7 +69,7 @@ def showCluster(dataSet, k, centroids, clusterAssment):
 
     for i in xrange(numSamples):
         markIndex = int(clusterAssment[i, 0])
-        plt.plot(dataset[i, 0], dataSet[i, 1], mark[markindex])
+        plt.plot(dataSet[i, 0], dataSet[i, 1], mark[markIndex])
 
     mark = ['Dr', 'Db', 'Dg', 'Dk', '^b', '+b', 'sb', 'db', '<b', 'pb']
 
@@ -84,7 +84,7 @@ print 'step 1: load data...'
 
 dataSet = []
 
-fileIn = open('/home/bblu/python/testpts.txt')
+fileIn = open('/home/bblu/python/algorithm/k-means.dat')
 for line in fileIn.readlines():
     pt = line.strip().split(' ')
     dataSet.append([float(pt[0]), float(pt[1])])
@@ -93,7 +93,7 @@ for line in fileIn.readlines():
 print 'step 2: clustering data...'
 
 dataSet = mat(dataSet)
-k = 4
+k = 5
 centroids, clusterAssment = kmeans(dataSet, k)
 
 showCluster(dataSet, k, centroids, clusterAssment)
