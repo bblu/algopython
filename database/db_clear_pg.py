@@ -14,7 +14,8 @@ def CheckName(name):
 db=DB(dbname='gis_meta',host='localhost',port=5432,user='postgres',passwd='123456')
 # 1.drop test tmp tables
 q=db.query("SELECT tablename FROM  pg_tables WHERE schemaname='public' and (tablename LIKE 'mdb_%' or tablename LIKE 'sys_%')")
-rows=q.namedresult()
+rows=q.namedresult()   #in windows is ok but not for linux(ubuntu 16) ???
+#if this error use rows=q.dictresult() and in fo tbname = row.values()[0] 
 
 for row in rows:
       tbname=row.tablename
