@@ -1,0 +1,7 @@
+*.swp
+*.o
+*.out
+*.bin
+*.pyc
+obj/
+dist/
