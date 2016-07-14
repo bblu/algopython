@@ -1,6 +1,6 @@
 #file mytime.py
 import sys,time
-reps=10000
+reps=1000
 repslist=range(reps)
 
 def timer(func, *pargs, **kargs):
@@ -56,9 +56,10 @@ def genFunc():
             yield abs(x)
     return list(gen())
 
-print(sys.version)
-for test in (forloop, listComp, mapCall, genExpr, genFunc):
-    ela,res=timer(test)
-    print('-'*30)
-    print('%-9s: %.5f => [%s...%s]'%(test.__name__,ela,res[0],res[-1]))
+if __name__ == '__main__':
+    print(sys.version)
+    for test in (forloop, listComp, mapCall, genExpr, genFunc):
+        ela,res=timer(test)
+        print('-'*30)
+        print('%-9s: %.5f => [%s...%s]'%(test.__name__,ela,res[0],res[-1]))
     
