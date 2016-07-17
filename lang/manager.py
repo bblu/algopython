@@ -1,9 +1,10 @@
-#manager.py bu bblu @ 2016-07
+# manager.py bu bblu @ 2016-07
 
 class Person:
-'''
-create and process person records
-'''
+    '''
+    create and process person records 
+    '''
+    __slots__ = ['name','job','pay']
     def __init__(self, name, job=None, pay=0):
         self.name=name
         self.job=job
@@ -51,6 +52,9 @@ class Department:
     def __init__(self,*args):
         self.members = list(args)
 
+    def __getitem__(self,index):
+        return self.members[index]
+    
     def addMember(self,person):
         self.members.append(person)
 
@@ -64,7 +68,7 @@ class Department:
             
 
 if __name__ == '__main__':
-    bob = Person('Bob Smith')
+    bob = Person('Bob Smith',pay=10)
     sue = Person('Sue Jones', job='dev', pay=1000)
     print(bob)
     print(sue)
@@ -84,4 +88,7 @@ if __name__ == '__main__':
     dep.addMember(tom)
     dep.giveRaise(.1)
     dep.showAll()
+    print('-'*30)
+    for p in dep:
+        print(p);
     
