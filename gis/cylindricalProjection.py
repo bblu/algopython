@@ -1,32 +1,41 @@
 import os,sys
 import math
 from PIL import Image
-import ImageDraw
 
-pic = Image.open('.\\28050.bmp')
+R=50.0
+r=350.0
 
-pw,ph=pic.size
-print pw,ph #280x50
+srcPic = Image.open('28050.bmp')
+srcPixWidth,srcPixHeight=srcPic.size
+print "srcPixWidth =",srcPixWidth,"srcPixHeight=",srcPixHeight #280x50
 
-R=5
-r=35
-T=2*R*r
-R=math.sqrt(T+r*r)
-rw=T/R
-print rw
-rh=2
+betaMax=math.asin(R/(R+r))
+print "betaMax =",betaMax,"degMax=", betaMax*180/math.pi
+alphaMax=math.pi/2-betaMax
+print "alphaMax =",alphaMax,"degMax=", alphaMax*180/math.pi
+arcMax = alphaMax*R
+print " arcMax = ",alphaMax,'*',R,'=',arcMax,'mm'
 
-pw2=pw*2
-ph2=ph
+srcHalfWidth=r*math.tan(betaMax)
+srcWidth = srcHalfWidth * 2
+print "srcHalfWidth=",srcHalfWidth, 'srcWidth =',srcWidth,'mm'
+scalePermm = srcPixWidth/srcWidth 
+print "scalePermm = ",srcPixWidth,'/',srcWidth,'=',scalePermm,"pix/mm"
 
-blank = Image.new("RGB",[pw2,ph2],"black")
-#drawObject = ImageDraw.Draw(blank)
-pixels = blank.load()
+objHalfPixWidth = (int)(math.ceil(arcMax*scalePermm))
+objPixWidth = objHalfPixWidth * 2
+print "objPixWidth =",objPixWidth,'pix halfWidth =',objHalfPixWidth
+objPixHeight = srcPixHeight
+print "objPixHeight =",objPixHeight
 
-for w0 in range(pw/2, pw):
+objPic = Image.new('RGB',[objPixWidth,objPixHeight])
+pixels = objPic.load()
+
+for w in range(objHalfPixWidth):
     
-    for h0 in range(0, ph):
-        pix = pic.getpixel((w, h))
-        pixels[pw0,h0]=pix;
+    for h in range(0, objPixHeight):
+        pix = srcPic.getpixel((w, h))
+        pixels[w,h]=pix
 
-blank.
+
+objPic.save('obj.bmp','BMP')
