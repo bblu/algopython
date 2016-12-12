@@ -1,13 +1,14 @@
+# -*- coding:utf-8 -*- 
 import os,sys
 import math
 from PIL import Image
-<<<<<<< HEAD
+
 #51，16
 #484，0
 R=38.0
 r=500.0
 
-srcPic = Image.open('28050.bmp')
+srcPic = Image.open('centrum.jpg')
 srcPixWidth,srcPixHeight=srcPic.size
 print "srcPixWidth =",srcPixWidth,"srcPixHeight=",srcPixHeight #280x50
 srcPixHalfWidth=(srcPixWidth+1)/2
@@ -26,15 +27,17 @@ scalePermm = srcPixWidth/srcWidth
 print "scalePermm = ",srcPixWidth,'/',srcWidth,'=',scalePermm,"pix/mm"
 pixR=R*scalePermm
 pixr=r*scalePermm
+print "pixR =",pixR,"pixr =",pixr
 objHalfPixWidth = (int)(math.ceil(arcMax*scalePermm))
 objPixWidth = objHalfPixWidth * 2+1
 print "objPixWidth =",objPixWidth,'pix halfWidth =',objHalfPixWidth
+srcHalfPixHeight = (srcPixHeight+1)/2
 objPixHeight = srcPixHeight
 print "objPixHeight =",objPixHeight
-
+objHalfPixHeight = (objPixHeight+1)/2
 objPic = Image.new('RGB',[objPixWidth,objPixHeight])
 pixels = objPic.load()
-a=math.tan(1)
+
 last=0.0
 def getPrjX(x):
     global last, pixR, pixr, srcPixHalfWidth, objHalfPixWidth
@@ -57,12 +60,28 @@ def getPrjX(x):
         #print w,last-prjx,srcPixHalfWidth - prjx,arc,beta
         return srcPixHalfWidth + prjx
 
+#Ellipse
+effectR = objHalfPixWidth-124
+alphaVert = math.atan(srcPixHeight/(2*pixr))
+b = effectR * math.sin(alphaVert)
+a = effectR
+print "Ellipse: a =",a,"b =",b
 
-def getPrjY(y):
-    global srcHalfPixHeight
-    if(y==objHalfPixHeight):
-        return srcHalfPixHeight
-    
+
+def getPrjY(fy,y):
+    global srcHalfPixHeight,b
+    delta = (b-fy)*(1-y/srcHalfPixHeight)
+    return y + delta
+
+if False:
+    srcHalfPixHeight=50.0
+    srcPixHalfWidth=50.0
+    b=10.0
+    a=50.0
+    for w in range(1,99):
+        for h in range(1,99):
+            prjY=getPrjY(w,h)
+
     
 def getInt(v1,v2,v3,v4,w1,w2,w3,w4):
     return int(math.floor(v1*w1+v2*w2+v3*w3+v4*w4))
@@ -110,51 +129,16 @@ def getDLPix2(x,y):
         return srcPic.getpixel((int(x),int(y)))
 
 for w in range(objPixWidth):
-    prjX=getPrjX(w);
+    prjX=getPrjX(w)
+    fx = prjX-srcPixHalfWidth
+    fx2 = (fx/a) * (fx/a)
+    fy = b * math.sqrt(1-fx2)
     if(prjX>=0 and prjX<srcPixWidth):
         #print w,prjX
         for h in range(0, objPixHeight):
-            #print prjX,h
-            pixels[w,h]=getDLPix2(prjX, h)
+            prjY=getPrjY(fy,h)
+            #if w==300:
+#                print w,h,prjY
+            pixels[w,h]=getDLPix2(prjX, prjY)
 
 objPic.save('obj.jpg','JPEG')
-=======
-
-R=50.0
-r=350.0
-
-srcPic = Image.open('28050.bmp')
-srcPixWidth,srcPixHeight=srcPic.size
-print "srcPixWidth =",srcPixWidth,"srcPixHeight=",srcPixHeight #280x50
-
-betaMax=math.asin(R/(R+r))
-print "betaMax =",betaMax,"degMax=", betaMax*180/math.pi
-alphaMax=math.pi/2-betaMax
-print "alphaMax =",alphaMax,"degMax=", alphaMax*180/math.pi
-arcMax = alphaMax*R
-print " arcMax = ",alphaMax,'*',R,'=',arcMax,'mm'
-
-srcHalfWidth=r*math.tan(betaMax)
-srcWidth = srcHalfWidth * 2
-print "srcHalfWidth=",srcHalfWidth, 'srcWidth =',srcWidth,'mm'
-scalePermm = srcPixWidth/srcWidth 
-print "scalePermm = ",srcPixWidth,'/',srcWidth,'=',scalePermm,"pix/mm"
-
-objHalfPixWidth = (int)(math.ceil(arcMax*scalePermm))
-objPixWidth = objHalfPixWidth * 2
-print "objPixWidth =",objPixWidth,'pix halfWidth =',objHalfPixWidth
-objPixHeight = srcPixHeight
-print "objPixHeight =",objPixHeight
-
-objPic = Image.new('RGB',[objPixWidth,objPixHeight])
-pixels = objPic.load()
-
-for w in range(objHalfPixWidth):
-    
-    for h in range(0, objPixHeight):
-        pix = srcPic.getpixel((w, h))
-        pixels[w,h]=pix
-
-
-objPic.save('obj.bmp','BMP')
->>>>>>> 64223b5e612f3672d455d66eca2f36f5f7412966
