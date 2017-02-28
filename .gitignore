@@ -3,5 +3,6 @@
 *.out
 *.bin
 *.pyc
+.idea
 obj/
 dist/
