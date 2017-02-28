@@ -7,6 +7,6 @@ def fab(n):
     f=fab(n-1)+fab(n-2);
     return f
 if __name__ == '__main__':
-    for i in range(1,10):
+    for i in range(1,100):
         print('fab(%d)=%d'%(i,fab(i)))
 
