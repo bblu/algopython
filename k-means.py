@@ -2,7 +2,7 @@
 # kmeans: k-means cluster  
 # Author : bblu
 # Date   : 2016-03-29  
-# HomePage : http://blog.csdn.net/zouxy09  
+# HomePage : http://www.bblu.club
 # Email  : gmwblu@gmail.cm 
 #################################################
 
