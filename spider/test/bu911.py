@@ -11,15 +11,13 @@ header = {
          }
 
 """
-https://www.susu58.com/htm/index.htm
-https://www.susu58.com/htm/movielist[1-4]/
-https://www.susu58.com/htm/downlist[1-7]/
+something you know
 
 """
 curDir = 'movielist1'
 
 def  spdDownlist():
-    req = urllib2.Request("https://www.susu58.com/htm/index.htm",headers=header)
+    req = urllib2.Request("https://www.susu.com/htm/index.htm",headers=header)
     html = urllib2.urlopen(req)
     htmldata = html.read()
     htmlpath = etree.HTML(htmldata)
@@ -34,11 +32,11 @@ def  spdDownlist():
         curDir = 'downlist%s'%i
         if not os.path.exists(curDir):
             os.mkdir(curDir)
-        pageIndex = "https://www.susu58.com/htm/movielist%s/" % i
+        pageIndex = "https://www.susu.com/htm/movielist%s/" % i
         spdPages(pageIndex)
         
 def  spdMovielist():
-    req = urllib2.Request("https://www.susu58.com/htm/index.htm",headers=header)
+    req = urllib2.Request("https://www.susu.com/htm/index.htm",headers=header)
     html = urllib2.urlopen(req)
     htmldata = html.read()
     htmlpath = etree.HTML(htmldata)
@@ -52,7 +50,7 @@ def  spdMovielist():
         curDir = 'movielist%s'%i
         if not os.path.exists(curDir):
             os.mkdir(curDir)
-        pageIndex = "https://www.susu58.com/htm/movielist%s/" % i
+        pageIndex = "https://www.susu.com/htm/movielist%s/" % i
         spdPages(pageIndex)
         #break
 
@@ -87,7 +85,7 @@ def getPage(pageUrl):
         items = htmlpath.xpath('//ul[@class="movieList"]/li/a/@href')
         i=1
         for item in items:
-            itemurl = "https://www.susu58.com/" + item
+            itemurl = "https://www.susu.com/" + item
             #print 'itemurl =',itemurl
             try:
                 getPagePicturess(i,itemurl)

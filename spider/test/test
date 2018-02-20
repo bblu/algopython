@@ -1,0 +1,7 @@
+import urllib,os; pf='Package Control.sublime-package';
+ipp = sublime.installed_packages_path();
+os.makedirs( ipp )
+if not os.path.exists(ipp) else None;
+urllib.install_opener( urllib.build_opener( urllib.ProxyHandler( )));
+open( os.path.join( ipp, pf), 'wb' ).write( urllib.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read());
+print( 'Please restart Sublime Text to finish installation')
