@@ -20,7 +20,7 @@ excel->pg
 学习Python语言，敲的示例代码。
 
 ## MLinaction
-学习《机器学习实践》第二章数字识别敲的代码
+学习《机器学习实践》第二章数字识别测试的代码
 
 ## network
 网络读取小测试
@@ -33,6 +33,9 @@ excel->pg
 
 ## tool
 生成ID末尾的校验码
+
+## hello_seleium.py
+seleium hello world
 
 ## K-means
 聚类算法并显示结果
