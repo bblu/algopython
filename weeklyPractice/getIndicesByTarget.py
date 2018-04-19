@@ -18,7 +18,7 @@ if __name__ == '__main__':
     tar = 7
     indices = mySolution.getIndicesByTarget(nums,tar)
     if len(indices) == 2:
-        print indices
+        print(indices)
     else:
-        print 'sory world!'
+        print('sory world!')
 
