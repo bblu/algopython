@@ -15,9 +15,9 @@ solution.pick(3);
 // pick(1) should return 0. Since in the array only nums[0] is equal to 1.
 solution.pick(1);
 '''
+import random
 
-
-class Solution(object):
+class Solution0(object):
     singles = {}
     randoms = {}
     def __init__(self, nums):
@@ -53,7 +53,21 @@ class Solution(object):
         return idx
 
 
+class Solution(object):
+    nums = []
 
+    def __init__(self, nums):
+        self.nums = nums
+
+    def pick(self, target):
+        cnt = 0
+        res = -1
+        for i, t in enumerate(self.nums):
+            if t == target:
+                cnt += 1
+                if random.randrange(cnt) == 0:
+                    res = i
+        return res
 
 
     # Your Solution object will be instantiated and called as such:
