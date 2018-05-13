@@ -1,3 +1,4 @@
+# pick random index by leetcode:389 @ 2018-04-28
 '''Given an array of integers with possible duplicates, randomly output the index of a given target number.
 You can assume that the given target number must exist in the array.
 
