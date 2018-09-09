@@ -24,8 +24,13 @@ for col in range(0,xl_sheet.ncols):
 print(fileds)
 
 for row in range(1,xl_sheet.nrows):
-    fileds=""
+    values=""
+    #这里可以选择必要的两三个字段看看在第几列
+    #values+= xl_sheet.cell(row,col).value + ','
     for col in range(0,xl_sheet.ncols):
-        fileds+= unicode(xl_sheet.cell(row,col).value) + ','
-    print(fileds)
-
+        values+= unicode(xl_sheet.cell(row,col).value) + ','
+    #print(values)
+    #去掉最后逗号
+    fields=fields[:-1]
+    sql = 'insert into dwzy.table (sbid,equip) values(%s)'%values
+    db.query(sql)
