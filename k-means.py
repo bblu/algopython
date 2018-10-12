@@ -5,7 +5,7 @@
 # HomePage : http://www.bblu.club
 # Email  : gmwblu@gmail.cm 
 #################################################
-
+#DDS-QSW-D-G-16-WT105
 from numpy import *
 import time
 import matplotlib.pyplot as plt
