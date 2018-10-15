@@ -67,18 +67,18 @@ def genSql(item_id):
         idxs = hull.vertices
         #idxs.append(idxs[0])
         print len(hull.vertices),hull.vertices
-        #drawHull(pts,idxs)
+        drawHull(pts,idxs)
         wo(item_id,pts,idxs)
     elif len(pts)==2:
         print '*****************************'
         wb(item_id,pts)
 
-pgtbs=pgcnn.query('select distinct item_id from equ_xl_dev order by item_id;')
+pgtbs=pgcnn.query('select distinct item_id from equ_xl_dev order by item_id limit 1;')
 
 for row in pgtbs.namedresult():
-    genSql(row.item_id)
-    #genSql("0016001200c5")
-    #break
+    #genSql(row.item_id)
+    genSql("1616G011000R03")
+    break
 
 #测试
 if __name__ == '__main__':
