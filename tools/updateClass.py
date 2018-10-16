@@ -3,7 +3,7 @@ import json
 import pymongo
 
 
-mgcnn=pymongo.MongoClient('172.17.68.69',27017)
+mgcnn=pymongo.MongoClient('127.168.1.67',27017)
 
 schema = mgcnn.map.schema
 data = mgcnn.map.device
