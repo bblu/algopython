@@ -6,5 +6,5 @@ random.shuffle(workers)
 for w in workers:
     print('p[%s]\t->\tT%d'%(w,t))
     t+=1
-    if(t == c+1):
+    if t == c+1 :
         t=1
